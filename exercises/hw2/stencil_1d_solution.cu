@@ -18,7 +18,7 @@ __global__ void stencil_1d(int *in, int *out)
   // Local thread reading its element
   temp[lindex] = in[gindex];
 
-  // Reading halos around the block size
+  // Reading halos around the block size(Only Threads around less than radius would need the halos )
   if (threadIdx.x < RADIUS)
   {
     temp[lindex - RADIUS] = in[gindex - RADIUS];
