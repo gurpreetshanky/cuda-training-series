@@ -40,8 +40,8 @@ __global__ void mmul(const float *A, const float *B, float *C, int ds)
     for (int i = 0; i < ds / block_size; i++) // Divinding into tiles
     {
 
-      // Load data into shared memory
-      As[threadIdx.y][threadIdx.x] = A[idy * ds + (i * block_size + threadIdx.x)]; // A is continous row major memory so juist simple airthmetic
+      // Load data into shared memory //Each thread loads a single element in shared memory
+      As[threadIdx.y][threadIdx.x] = A[idy * ds + (i * block_size + threadIdx.x)]; // A is continous row major memory so just simple airthmetic
       Bs[threadIdx.y][threadIdx.x] = B[(i * block_size + threadIdx.y) * ds + idx];
 
       // Synchronize
